@@ -11,6 +11,8 @@ class HomeViewModel: ObservableObject {
     // MARK: - Properties
     @Published private(set) var players: [Player] = []
     @Published private(set) var categories: [Category] = []
+    @Published private(set) var products: [Product] = []
+    @Published private(set) var brands: [Brand] = []
     @Published private(set) var isLoading: Bool = true
     @Published private(set) var errorMessage: String?
     private let dispatchGroup = DispatchGroup()
@@ -32,6 +34,8 @@ class HomeViewModel: ObservableObject {
         
         getCategories()
         getPlayers()
+        getProducts()
+        getBrands()
         
         dispatchGroup.notify(queue: .main) { [weak self] in
             guard let self else { return }
@@ -72,6 +76,39 @@ class HomeViewModel: ObservableObject {
             
             self.dispatchGroup.leave()
         }
-
+    }
+    
+    private func getProducts() {
+        dispatchGroup.enter()
+        
+        homeUseCase.getProducts { [weak self] response in
+            guard let self else { return }
+            
+            switch response {
+            case .success(let response):
+                self.products = response
+            case .failure(let message):
+                self.errorMessage = message
+            }
+            
+            self.dispatchGroup.leave()
+        }
+    }
+    
+    private func getBrands() {
+        dispatchGroup.enter()
+        
+        homeUseCase.getBrands { [weak self] response in
+            guard let self else { return }
+            
+            switch response {
+            case .success(let response):
+                self.brands = response
+            case .failure(let message):
+                self.errorMessage = message
+            }
+            
+            self.dispatchGroup.leave()
+        }
     }
 }

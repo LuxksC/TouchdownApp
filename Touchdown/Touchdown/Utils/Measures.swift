@@ -20,6 +20,12 @@ public extension PreferencesManager {
                 .first
             return keyWindow?.safeAreaInsets
         }
+        
+        static var columSpacing: Double = 10
+        
+        static var rowSpacing: Double = 16
+        
+        static var gridLayout: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: rowSpacing), count: 2)
     }
 }
 

@@ -37,6 +37,17 @@ struct HomeView: View {
                     PlayerCarrousselView(players: viewModel.players)
                         .frame(height: 240)
                         .padding(.top, (PreferencesManager.Measures.safeAreaInsets?.top ?? 0) + 60)
+                    
+                    CategoryGridView(categories: viewModel.categories)
+                    
+                    TitleView(title: "Helmets")
+                    
+                    ProductGridView(products: viewModel.products)
+                    
+                    TitleView(title: "Brands")
+                    
+                    BrandGridView(brands: viewModel.brands)
+                    
                     FooterView()
                 }
                 

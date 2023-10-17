@@ -10,6 +10,8 @@ import Foundation
 protocol HomeUseCaseProtocol {
     func getCategories(completionHandler: @escaping (MockResponse<[Category]>) -> Void)
     func getPlayers(completionHandler: @escaping (MockResponse<[Player]>) -> Void)
+    func getProducts(completionHandler: @escaping (MockResponse<[Product]>) -> Void)
+    func getBrands(completionHandler: @escaping (MockResponse<[Brand]>) -> Void)
 }
 
 final class HomeUseCase: HomeUseCaseProtocol {
@@ -20,5 +22,13 @@ final class HomeUseCase: HomeUseCaseProtocol {
     
     func getPlayers(completionHandler: @escaping (MockResponse<[Player]>) -> Void) {
         Bundle.main.decode("player.json", completionHandler: completionHandler)
+    }
+    
+    func getProducts(completionHandler: @escaping (MockResponse<[Product]>) -> Void) {
+        Bundle.main.decode("product.json", completionHandler: completionHandler)
+    }
+    
+    func getBrands(completionHandler: @escaping (MockResponse<[Brand]>) -> Void) {
+        Bundle.main.decode("brand.json", completionHandler: completionHandler)
     }
 }
